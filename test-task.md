@@ -32,42 +32,24 @@
 
 Задание 1: Изоморфизмы
 
-```python
-
-def is\_isomorphic(s: str, t: str) -> bool:
-
-&#x20;   if len(s) != len(t):
-
-&#x20;       return False
-
-&#x20;   
-
-&#x20;   map\_s\_t = {}
-
-&#x20;   map\_t\_s = {}
-
-&#x20;   
-
-&#x20;   for char\_s, char\_t in zip(s, t):
-
-&#x20;       if char\_s not in map\_s\_t:
-
-&#x20;           map\_s\_t\[char\_s] = char\_t
-
-&#x20;       if char\_t not in map\_t\_s:
-
-&#x20;           map\_t\_s\[char\_t] = char\_s
-
-&#x20;           
-
-&#x20;       if map\_s\_t\[char\_s] != char\_t or map\_t\_s\[char\_t] != char\_s:
-
-&#x20;           return False
-
-&#x20;           
-
-&#x20;   return True
-
+```
+def is_isomorphic(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+    
+    map_s_t = {}
+    map_t_s = {}
+    
+    for char_s, char_t in zip(s, t):
+        if char_s not in map_s_t:
+            map_s_t[char_s] = char_t
+        if char_t not in map_t_s:
+            map_t_s[char_t] = char_s
+            
+        if map_s_t[char_s] != char_t or map_t_s[char_t] != char_s:
+            return False
+            
+    return True
 ```
 
 Оптимальность:
@@ -81,17 +63,11 @@ def is\_isomorphic(s: str, t: str) -> bool:
 Задание 2: Натуральная последовательность
 
 ```
-
-def missing\_number(nums: list\[int]) -> int:
-
-&#x20;   n = len(nums) + 1
-
-&#x20;   expected\_sum = n \* (n + 1) // 2
-
-&#x20;   actual\_sum = sum(nums)
-
-&#x20;   return expected\_sum - actual\_sum
-
+def missing_number(nums: list[int]) -> int:
+    n = len(nums) + 1
+    expected_sum = n * (n + 1) // 2
+    actual_sum = sum(nums)
+    return expected_sum - actual_sum
 ```
 
 Оптимальность:
@@ -103,29 +79,17 @@ def missing\_number(nums: list\[int]) -> int:
 Задание 3: Факторизация
 
 ```
-
-def prime\_factors(n: int) -> list\[int]:
-
-&#x20;   factors = \[]
-
-&#x20;   d = 2
-
-&#x20;   while d \* d <= n:
-
-&#x20;       while n % d == 0:
-
-&#x20;           factors.append(d)
-
-&#x20;           n //= d
-
-&#x20;       d += 1
-
-&#x20;   if n > 1:
-
-&#x20;       factors.append(n)
-
-&#x20;   return factors
-
+def prime_factors(n: int) -> list[int]:
+    factors = []
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            factors.append(d)
+            n //= d
+        d += 1
+    if n > 1:
+        factors.append(n)
+    return factors
 ```
 
 Оптимальность:
@@ -143,17 +107,11 @@ def prime\_factors(n: int) -> list\[int]:
 Задание 1: Абитуриенты
 
 ```
-
 SELECT 
-
-&#x20;   id, 
-
-&#x20;   scores, 
-
-&#x20;   RANK() OVER (ORDER BY scores DESC) AS position
-
+    id, 
+    scores, 
+    RANK() OVER (ORDER BY scores DESC) AS position
 FROM examination;
-
 ```
 
 
@@ -169,21 +127,13 @@ FROM examination;
 Задание 3: Покупки
 
 ```
-
 SELECT 
-
-&#x20;   a.client\_id
-
+    a.client_id
 FROM account a
-
-JOIN transaction t ON a.id = t.account\_id
-
-WHERE t.transaction\_date >= CURRENT\_DATE - INTERVAL '1 month'
-
-GROUP BY a.client\_id
-
+JOIN transaction t ON a.id = t.account_id
+WHERE t.transaction_date >= CURRENT_DATE - INTERVAL '1 month'
+GROUP BY a.client_id
 HAVING SUM(t.amount) < 5000;
-
 ```
 
 
